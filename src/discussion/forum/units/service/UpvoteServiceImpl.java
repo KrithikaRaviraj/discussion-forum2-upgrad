@@ -9,7 +9,7 @@ import com.forum.units.User;
 
 public class UpvoteServiceImpl implements UpvoteService {
 	public static ArrayList<Upvote> upvotes = new ArrayList<>();
-	
+
 	public Upvote addUpvote(Question question, User user) {
 		if (question != null && user != null) {
 			Upvote upvote = getUpvote(user, question, null);
@@ -24,7 +24,7 @@ public class UpvoteServiceImpl implements UpvoteService {
 		System.out.println("Any specified field can't be empty");
 		return null;
 	}
-	
+
 	public long upvoteCount(Reply reply) {
 		int count = 0;
 		for (Upvote upvote : upvotes) {
@@ -34,7 +34,7 @@ public class UpvoteServiceImpl implements UpvoteService {
 		}
 		return count;
 	}
-	
+
 	public Upvote addUpvote(Reply reply, User user) {
 		if (reply != null && user != null) {
 			Upvote upvote = getUpvote(user, null, reply);
@@ -48,7 +48,7 @@ public class UpvoteServiceImpl implements UpvoteService {
 		System.out.println("Any specified field can't be empty");
 		return null;
 	}
-	
+
 	private Upvote getUpvote(User user, Question question, Reply reply) {
 		for (Upvote upvote : upvotes) {
 
@@ -56,13 +56,17 @@ public class UpvoteServiceImpl implements UpvoteService {
 			  Change the below if condition such that user can not upvote the same question or same reply twice,
 			  but can upvote multiple questions and replies
 			*/
-			if ((upvote.getUser() == user) && ((upvote.getQuestion() == question) || (upvote.getReply() == reply))) {
-				return upvote;
-			}
+			if ((upvote.getUser() == user) &&
+                    (((question != null) && (upvote.getQuestion() == question)) ||
+                            ((reply != null) && (upvote.getReply() == reply)))) {
+                return upvote;
+            }
+
 		}
 		return null;
 	}
-	
+
+
 	private Upvote addUpvote(User user, Question question, Reply reply) {
 		Upvote upvote = new Upvote();
 		upvote.setQuestion(question);
