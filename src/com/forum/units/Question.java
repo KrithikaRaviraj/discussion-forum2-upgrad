@@ -18,7 +18,7 @@ public class Question extends AbstractEntity {
 
 		// please write your code below and follow this instruction:
 		// 1. Call the parent class' setId method and pass in lastEntry as the method variable;
-       setId(lastEntry);
+		this.setId(lastEntry);
 	}
 
 	/**
@@ -29,7 +29,7 @@ public class Question extends AbstractEntity {
 	public String getTitle() {
 		// please write your code here
 		// you should return the instance variable title of this question
-		return title;
+		return this.title;
 	}
 
 
@@ -52,7 +52,7 @@ public class Question extends AbstractEntity {
 	public String getMessage() {
 		// please write your code here
 		// You should return the instance variable message of this question
-		return message;
+		return this.message;
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class Question extends AbstractEntity {
 	public User getUser() {
 		// please write your code here
 		// You should return the instance variable user of this question
-		return user;
+		return this.user;
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class Question extends AbstractEntity {
 	public int getUpvoteCount() {
 		// please write your code here
 		// You should return the instance variable upvoteCount
-		return upvoteCount;
+		return this.upvoteCount;
 	}
 
 	/**
@@ -105,7 +105,6 @@ public class Question extends AbstractEntity {
 	public void increaseUpvoteCount() {
 		// write your code here
 		// Increase the number stored in the instance variable upvoteCount by 1
-		upvoteCount += 1;
+		++this.upvoteCount;
 	}
-
 }

@@ -10,16 +10,18 @@ public abstract class AbstractEntity {
 	private long id;
 
 	/**
-	 *
-	 * Write a method called getId that requires no parameters and
-	 * returns the id of this Abstract entity
-	 *
-	 * @return the id of this Abstract entity
+	 /*
+	 /* Write a method called getId that requires no parameters and
+	 /* returns the id of this Abstract entity
+	 /*
+	 /* @return the id of this Abstract entity
 	 */
 	// Please write code for the s method here
+	public AbstractEntity() {
+	}
 
 	public long getId() {
-		return id;
+		return this.id;
 	}
 
 	/**
@@ -49,7 +51,7 @@ public abstract class AbstractEntity {
 
 
 	public Date getCreated() {
-		return created;
+		return this.created;
 	}
 
 	public void setCreated() {

@@ -61,9 +61,9 @@ public class UserActivity {
 	}
 
 	/**
-	 /* Ask the user to enter a new question
-	 /* @param user: the user who is asking the question
-	 /* @throws IOException
+	 * /* Ask the user to enter a new question
+	 * /* @param user: the user who is asking the question
+	 * /* @throws IOException
 	 */
 	public void postNewQuestion(User user) throws IOException {
 		// ask user to write the question title
@@ -82,11 +82,11 @@ public class UserActivity {
 	}
 
 	/**
-	 /* This method returns all of the questions that are stored in the class forum
-	 /* @param userActivity: the activity history of the user who is viewing this question
-	 /* @param user:         the user who is viewing this question
-	 /* @throws NumberFormatException
-	 /*@throws IOException
+	 * /* This method returns all of the questions that are stored in the class forum
+	 * /* @param userActivity: the activity history of the user who is viewing this question
+	 * /* @param user:         the user who is viewing this question
+	 * /* @throws NumberFormatException
+	 * /*@throws IOException
 	 */
 	public void seeAllQuestions(UserActivity userActivity, User user) throws NumberFormatException, IOException {
 		ArrayList<Question> questions = QuestionServiceImpl.questions; // getting all the questions
@@ -187,28 +187,23 @@ public class UserActivity {
 		// Write else if condition to check if the user is a moderator
 		// Write else if condition to check if the user is a regular user
 		else if (user.getUserRole() == UserRole.MODERATOR) {
-			if (question.getUser().getUserRole() == UserRole.USER ||question.getUser() == user) {
-				questionService.deleteQuestion(question);
-				System.out.println("Question deleted successfully.");
-			} else {
+			if (question.getUser().getUserRole() != UserRole.USER && question.getUser() != user) {
 				System.out.println("You are not authorised to delete this question.");
-			}
-		} else{
-			// Regular users can only delete their own questions
-			if (question.getUser() == user) {
-				questionService.deleteQuestion(question);
-				System.out.println("Question deleted successfully.");
 			} else {
-				System.out.println("You are not authorised to delete this question.");
+				this.questionService.deleteQuestion(question);
+				System.out.println("Question deleted successfully by Moderator.");
 			}
+		} else if (question.getUser() == user) {
+			this.questionService.deleteQuestion(question);
+			System.out.println("Question deleted successfully by the Author.");
+		} else {
+			System.out.println("You are not authorised to delete this question.");
 		}
-		if (QuestionServiceImpl.questions.size() == 0)
+
+		if (QuestionServiceImpl.questions.size() == 0) {
 			DiscussionForum.menu(user, userActivity);
+		}
 	}
-
-
-
-
 
 	private Question getQuestion() throws NumberFormatException, IOException {
 		Question question;
@@ -276,5 +271,4 @@ public class UserActivity {
 		}
 		return reply;
 	}
-
 }

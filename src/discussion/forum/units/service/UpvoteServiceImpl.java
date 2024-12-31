@@ -1,6 +1,7 @@
 package discussion.forum.units.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.forum.units.Question;
 import com.forum.units.Reply;
@@ -50,20 +51,20 @@ public class UpvoteServiceImpl implements UpvoteService {
 	}
 
 	private Upvote getUpvote(User user, Question question, Reply reply) {
-		for (Upvote upvote : upvotes) {
+		Iterator var4 = upvotes.iterator();
 
-			/*
-			  Change the below if condition such that user can not upvote the same question or same reply twice,
-			  but can upvote multiple questions and replies
-			*/
-			if ((upvote.getUser() == user) &&
-                    (((question != null) && (upvote.getQuestion() == question)) ||
-                            ((reply != null) && (upvote.getReply() == reply)))) {
-                return upvote;
-            }
+		Upvote upvote;
+		do {
+			do {
+				if (!var4.hasNext()) {
+					return null;
+				}
 
-		}
-		return null;
+				upvote = (Upvote)var4.next();
+			} while(upvote.getUser() != user);
+		} while((question == null || upvote.getQuestion() != question) && (reply == null || upvote.getReply() != reply));
+
+		return upvote;
 	}
 
 

@@ -11,7 +11,7 @@ import discusion.forum.activiy.UserActivity;
 
 public class DiscussionForum {
 	
-	public static void main(String args[]) throws IOException {
+	public static void main(String [] args) throws IOException {
 		User user;
 		UserActivity userActivity = new UserActivity();
 		userActivity.userService.createUser("admin", "admin", "admin", UserRole.ADMIN);
